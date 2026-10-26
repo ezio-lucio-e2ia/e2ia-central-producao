@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14243a">
+  <meta name="description" content="E2IA — Central de produção inteligente de produtos digitais.">
+  <title>E2IA | Central de Produção</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">E2</div>
+        <div><strong>E2IA</strong><small>Central de produção</small></div>
+      </div>
+      <nav aria-label="Navegação principal">
+        <button class="nav-item active" data-view="dashboard"><span>▦</span> Visão geral</button>
+        <button class="nav-item" data-view="tasks"><span>☷</span> Tarefas</button>
+        <button class="nav-item" data-view="products"><span>◇</span> Produtos</button>
+        <button class="nav-item" data-view="posts"><span>✎</span> Divulgação</button>
+        <button class="nav-item" data-view="team"><span>◎</span> Assistentes</button>
+        <button class="nav-item" data-view="rules"><span>✓</span> Padrões de qualidade</button>
+        <button class="nav-item" data-view="data"><span>⇅</span> Dados e cópias</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="privacy-note"><span class="dot"></span><div><strong>Modo local</strong><small>Seus dados ficam neste navegador.</small></div></div>
+        <small class="version">E2IA • versão 2.0</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu">☰</button>
+        <div><p class="eyebrow" id="dateLabel">CENTRAL DE OPERAÇÕES</p><h1 id="pageTitle">Visão geral</h1></div>
+        <div class="top-actions"><span class="status-pill"><span class="dot"></span> Núcleo local ativo</span><button class="primary-btn" id="quickAdd">＋ Nova tarefa</button></div>
+      </header>
+
+      <section class="view active" id="view-dashboard">
+        <div class="welcome-card">
+          <div><p class="eyebrow light">PRODUÇÃO COM MÉTODO</p><h2>Transformar conhecimento em produtos de valor.</h2><p>Planejar, produzir, revisar e acompanhar — sem perder o controle das etapas.</p></div>
+          <div class="welcome-symbol" aria-hidden="true">E2IA<span>✦</span></div>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-label">Tarefas totais</div><div class="stat-value" id="statTotal">0</div><div class="stat-foot">Registradas no painel</div></article>
+          <article class="stat-card"><div class="stat-label">Em andamento</div><div class="stat-value" id="statDoing">0</div><div class="stat-foot">Trabalho em execução</div></article>
+          <article class="stat-card"><div class="stat-label">Concluídas</div><div class="stat-value" id="statDone">0</div><div class="stat-foot">Marcadas como finalizadas</div></article>
+          <article class="stat-card"><div class="stat-label">Prioridade alta</div><div class="stat-value" id="statHigh">0</div><div class="stat-foot">Precisam de atenção</div></article>
+        </div>
+        <div class="content-grid">
+          <section class="panel"><div class="panel-heading"><div><h3>Próximas ações</h3><p>O que precisa avançar agora</p></div><button class="text-btn" data-goto="tasks">Ver todas →</button></div><div id="nextTasks" class="task-list"></div></section>
+          <section class="panel"><div class="panel-heading"><div><h3>Produto em foco</h3><p>Projeto-piloto da E2IA</p></div><span class="tag tag-blue">Piloto</span></div><div class="focus-product"><div class="book-icon">M</div><div><h4>Mestre da EBD</h4><p>Guia prático para formação e preparação de professores da Escola Bíblica Dominical.</p><span class="tag">Produto digital</span></div></div><div class="progress-label"><span>Preparação do fluxo de produção</span><strong id="pilotProgress">0%</strong></div><div class="progress-track"><div id="pilotBar" class="progress-bar"></div></div><p class="muted small">O percentual considera as tarefas-piloto cadastradas e concluídas neste painel.</p></section>
+        </div>
+        <section class="panel principles-panel"><div class="panel-heading"><div><h3>Princípios inegociáveis</h3><p>Como a E2IA deve trabalhar</p></div></div><div class="principles-grid"><div><span class="principle-icon">✓</span><strong>Exatidão</strong><p>Não inventar dados, fontes, resultados ou funcionalidades.</p></div><div><span class="principle-icon">◉</span><strong>Honestidade</strong><p>Informar o que foi feito, o que falta e o que depende de autorização.</p></div><div><span class="principle-icon">↗</span><strong>Excelência</strong><p>Produzir com método, revisão e melhoria contínua.</p></div><div><span class="principle-icon">▤</span><strong>Conclusão</strong><p>Trabalhar por etapas com começo, meio, fim e relatório claro.</p></div></div></section>
+      </section>
+
+      <section class="view" id="view-tasks">
+        <div class="section-intro"><div><h2>Quadro de tarefas</h2><p>Organize o trabalho e acompanhe cada etapa até a conclusão.</p></div><div class="link-actions"><button class="secondary-btn" id="launchTpl">Modelo de lançamento</button><button class="primary-btn" id="addTaskFromTasks">＋ Nova tarefa</button></div></div>
+        <div class="seg"><button id="modeBoard" class="on">▦ Quadro</button><button id="modeList">☰ Lista</button></div>
+        <div class="toolbar" id="listToolbar" hidden><input id="taskSearch" type="search" placeholder="Buscar tarefa ou produto..." aria-label="Buscar tarefas"><select id="statusFilter" aria-label="Filtrar por situação"><option value="all">Todas as situações</option><option value="pending">Pendente</option><option value="doing">Em andamento</option><option value="waiting">Aguardando autorização</option><option value="done">Concluída</option></select><select id="priorityFilter" aria-label="Filtrar por prioridade"><option value="all">Todas as prioridades</option><option value="high">Alta</option><option value="medium">Média</option><option value="low">Baixa</option></select></div>
+        <div id="board" class="board"></div>
+        <div id="allTasks" class="task-list task-list-large" hidden></div>
+      </section>
+
+      <section class="view" id="view-products">
+        <div class="section-intro"><div><h2>Produtos digitais</h2><p>Projetos acompanhados pela fábrica E2IA.</p></div><button class="primary-btn" id="addProductBtn">＋ Novo produto</button></div>
+        <div id="productsGrid" class="products-grid"></div>
+      </section>
+
+      <section class="view" id="view-posts">
+        <div class="section-intro"><div><h2>Divulgação nas redes</h2><p>Planeje posts para Instagram, Facebook e WhatsApp e acompanhe cada um até a publicação.</p></div><button class="primary-btn" id="addPostBtn">＋ Novo post</button></div>
+        <div class="panel link-card"><div><h3>Link de venda — Mestre da EBD</h3><p class="muted small" id="salesLinkText">https://eziolucio97.hotmart.host/mestredaebd</p></div><div class="link-actions"><button class="secondary-btn" id="copyLinkBtn">Copiar link</button><a class="secondary-btn" id="openLinkBtn" href="https://eziolucio97.hotmart.host/mestredaebd" target="_blank" rel="noopener noreferrer">Abrir</a></div></div>
+        <div class="panel gen"><h3>Gerar post por modelo</h3><div class="form-row"><select id="genTpl" aria-label="Modelo"><option value="dica">Dica para professores</option><option value="pergunta">Pergunta</option><option value="reflexao">Reflexão</option><option value="oferta">Apresentar o e-book</option><option value="bastidores">Bastidores</option></select><input id="genTopic" maxlength="140" placeholder="Tema. Ex.: Como prender a atenção da classe"></div><button class="primary-btn" id="genBtn">Gerar texto do post</button></div>
+        <div class="panel"><div class="cal-head"><button class="icon-btn" id="calPrev" aria-label="Mês anterior">◀</button><h3 id="calTitle"></h3><button class="icon-btn" id="calNext" aria-label="Próximo mês">▶</button></div><div class="cal" id="calGrid"></div><p class="muted small">Toque em um dia para criar um post nessa data.</p></div>
+        <div id="postsList" class="task-list task-list-large"></div>
+      </section>
+
+      <section class="view" id="view-team">
+        <div class="section-intro"><div><h2>Equipe de assistentes</h2><p>Responsabilidades definidas para evitar trabalho genérico ou sem revisão.</p></div></div>
+        <div class="assistant-grid" id="assistantGrid"></div>
+        <div class="notice"><strong>Limite importante:</strong> estes perfis organizam o método de trabalho. Nesta versão, eles não são agentes autônomos nem estão conectados a um modelo de IA. A integração real será uma etapa posterior.</div>
+      </section>
+
+      <section class="view" id="view-rules">
+        <div class="section-intro"><div><h2>Padrões de qualidade</h2><p>Critérios para avaliar cada entrega antes de considerá-la pronta.</p></div></div>
+        <div class="quality-list" id="qualityList"></div>
+        <div class="panel"><h3>Regra de autorização</h3><p>A E2IA deve avançar sozinha nas etapas já autorizadas. Deve interromper apenas quando faltar informação indispensável, houver risco relevante, custo, publicação externa, uso de dados pessoais ou decisão estratégica que exija aprovação humana.</p></div>
+      </section>
+
+      <section class="view" id="view-data">
+        <div class="section-intro"><div><h2>Dados e cópias de segurança</h2><p>Proteja seu trabalho e transfira os dados entre navegadores manualmente.</p></div></div>
+        <div class="data-grid">
+          <div class="panel"><div class="data-icon">⇧</div><h3>Exportar cópia</h3><p>Baixe os produtos e as tarefas cadastradas em um arquivo JSON. Guarde-o em local seguro.</p><button class="primary-btn" id="exportBtn">Exportar dados</button></div>
+          <div class="panel"><div class="data-icon">⇩</div><h3>Importar cópia</h3><p>Restaure dados de uma cópia anterior. A importação substitui os dados atuais deste navegador.</p><label class="file-btn" for="importFile">Escolher arquivo JSON</label><input id="importFile" type="file" accept=".json,application/json" hidden></div>
+          <div class="panel"><div class="data-icon">⬇</div><h3>Instalar no celular</h3><p id="installHelp">Depois de publicado em HTTPS, o E2IA pode ser instalado como aplicativo, com ícone na tela inicial.</p><button class="primary-btn" id="installBtn" hidden>Instalar o E2IA</button></div>
+          <div class="panel"><div class="data-icon">↺</div><h3>Restaurar exemplo inicial</h3><p>Recria tarefas e produtos de demonstração. Isso apagará as alterações locais atuais.</p><button class="secondary-btn danger-btn" id="resetBtn">Restaurar dados de exemplo</button></div>
+        </div>
+        <div class="notice"><strong>Transparência:</strong> esta versão salva dados apenas no armazenamento local do navegador. Ela não sincroniza automaticamente entre celular e computador e não oferece autenticação ou armazenamento em nuvem.</div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="taskDialog" class="modal">
+    <form id="taskForm" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">GESTÃO DO TRABALHO</p><h2 id="taskDialogTitle">Nova tarefa</h2></div><button type="button" class="close-btn" data-close="taskDialog" aria-label="Fechar">×</button></div>
+      <input type="hidden" id="taskId">
+      <label>Nome da tarefa<input id="taskTitle" required maxlength="140" placeholder="Ex.: Revisar capítulo 1"></label>
+      <label>Produto relacionado<input id="taskProduct" maxlength="100" placeholder="Ex.: Mestre da EBD"></label>
+      <div class="form-row"><label>Situação<select id="taskStatus"><option value="pending">Pendente</option><option value="doing">Em andamento</option><option value="waiting">Aguardando autorização</option><option value="done">Concluída</option></select></label><label>Prioridade<select id="taskPriority"><option value="high">Alta</option><option value="medium" selected>Média</option><option value="low">Baixa</option></select></label></div>
+      <label>Responsável<input id="taskOwner" maxlength="80" placeholder="Ex.: Revisor"></label>
+      <label>Prazo<input id="taskDue" type="date"></label>
+      <label>Observações<textarea id="taskNotes" rows="3" maxlength="1000" placeholder="Critério de conclusão, dependências ou contexto"></textarea></label>
+      <div class="modal-actions"><button type="button" class="secondary-btn" data-close="taskDialog">Cancelar</button><button type="submit" class="primary-btn">Salvar tarefa</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="productDialog" class="modal">
+    <form id="productForm" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">PORTFÓLIO</p><h2>Novo produto</h2></div><button type="button" class="close-btn" data-close="productDialog" aria-label="Fechar">×</button></div>
+      <label>Nome do produto<input id="productName" required maxlength="100" placeholder="Nome do produto"></label>
+      <label>Descrição<textarea id="productDescription" rows="3" maxlength="500" placeholder="O que este produto entrega?"></textarea></label>
+      <label>Etapa atual<select id="productStage"><option>Planejamento</option><option>Pesquisa</option><option>Produção</option><option>Revisão</option><option>Validação</option><option>Publicado</option><option>Pausado</option></select></label>
+      <div class="modal-actions"><button type="button" class="secondary-btn" data-close="productDialog">Cancelar</button><button type="submit" class="primary-btn">Salvar produto</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="postDialog" class="modal">
+    <form id="postForm" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">DIVULGAÇÃO</p><h2 id="postDialogTitle">Novo post</h2></div><button type="button" class="close-btn" data-close="postDialog" aria-label="Fechar">×</button></div>
+      <input type="hidden" id="postId">
+      <label>Tema ou título do post<input id="postTitle" required maxlength="140" placeholder="Ex.: 3 erros de quem ensina na EBD"></label>
+      <div class="form-row"><label>Rede<select id="postChannel"><option>Instagram</option><option>Facebook</option><option>WhatsApp</option></select></label><label>Situação<select id="postStatus"><option value="idea">Ideia</option><option value="written">Texto pronto</option><option value="scheduled">Agendado</option><option value="published">Publicado</option></select></label></div>
+      <label>Data prevista<input id="postDate" type="date"></label>
+      <label>Texto do post <small id="postCount" class="muted">0/2000</small><textarea id="postText" rows="5" maxlength="2000" placeholder="Escreva ou cole o texto aqui"></textarea></label>
+      <div class="modal-actions"><button type="button" class="secondary-btn" id="tagsBtn">＋ Hashtags</button><button type="button" class="secondary-btn" data-close="postDialog">Cancelar</button><button type="submit" class="primary-btn">Salvar post</button></div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+  <script>if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body>
+</html>
